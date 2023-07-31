@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Midi Piano</title>
-  <script src="script.js" defer></script>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="piano">
-    <div data-note="C" class="key white"></div>
-    <div data-note="Db" class="key black"></div>
-    <div data-note="D" class="key white"></div>
-    <div data-note="Eb" class="key black"></div>
-    <div data-note="E" class="key white"></div>
-    <div data-note="F" class="key white"></div>
-    <div data-note="Gb" class="key black"></div>
-    <div data-note="G" class="key white"></div>
-    <div data-note="Ab" class="key black"></div>
-    <div data-note="A" class="key white"></div>
-    <div data-note="Bb" class="key black"></div>
-    <div data-note="B" class="key white"></div>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Midi Piano</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <h1>Midi Piano</h1>
+    </nav>
+    <div class="helper">
+      Click to play or press keys Z, S, X, D, C, V, G, B, H, N, J, M
+    </div>
+    <div class="container">
+      <div class="piano">
+        <div data-note="C" data-key="Z" class="key white"></div>
+        <div data-note="Db" data-key="S" class="key black"></div>
+        <div data-note="D" data-key="X" class="key white"></div>
+        <div data-note="Eb" data-key="D" class="key black"></div>
+        <div data-note="E" data-key="C" class="key white"></div>
+        <div data-note="F" data-key="V" class="key white"></div>
+        <div data-note="Gb" data-key="G" class="key black"></div>
+        <div data-note="G" data-key="B" class="key white"></div>
+        <div data-note="Ab" data-key="H" class="key black"></div>
+        <div data-note="A" data-key="N" class="key white"></div>
+        <div data-note="Bb" data-key="J" class="key black"></div>
+        <div data-note="B" data-key="M" class="key white"></div>
+      </div>
+    </div>
+    <footer>
+      Made with <span class="heart">❤</span> by
+      <a href="https://github.com/i-m-afk/">i-m-afk</a>
+      || Inspired by
+      <a href="https://midiano.com/">Midiano</a>
+    </footer>
+    <script src="script.js" defer></script>
+  </body>
 </html>

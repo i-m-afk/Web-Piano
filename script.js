@@ -14,6 +14,15 @@ const NOTE_DETAILS = [
   { note: "B", key: "M", frequency: 493.883, active: false },
 ];
 
+// remove help
+const help = document.querySelector(".helper");
+help.addEventListener("click", () => {
+  help.setAttribute("class", "helper inactive");
+});
+
+/**
+ * Keyboard events
+ */
 document.addEventListener("keydown", (e) => {
   if (e.repeat) return;
   const keyboardKey = e.code; // e.key works for caps on
@@ -21,7 +30,7 @@ document.addEventListener("keydown", (e) => {
 
   if (noteDetail == null) return;
 
-  noteDetail.active = "true";
+  noteDetail.active = true;
   playNotes();
 });
 
@@ -35,9 +44,47 @@ document.addEventListener("keyup", (e) => {
   playNotes();
 });
 
+/**
+ * Mouse events
+ */
+
+document.addEventListener("mousedown", (e) => {
+  const note = e.target.dataset.note;
+  const noteDetail = getMouseNoteDetail(note);
+
+  if (noteDetail == undefined) return;
+  noteDetail.active = true; // start note
+
+  playNotes();
+});
+
+document.addEventListener("mouseup", (e) => {
+  const note = e.target.dataset.note;
+  const noteDetail = getMouseNoteDetail(note);
+
+  if (noteDetail == undefined) return;
+  noteDetail.active = false; // stop note
+
+  playNotes();
+});
+
+/**
+ * Helper functions
+ */
+
 function getNoteDetail(keyboardKey) {
   return NOTE_DETAILS.find((n) => `Key${n.key}` === keyboardKey); // `Key${n.key}`
 }
+
+function getMouseNoteDetail(mouseNote) {
+  return NOTE_DETAILS.find((n) => n.note === mouseNote);
+}
+
+document.querySelector(".container").addEventListener("mouseout", (e) => {
+  NOTE_DETAILS.forEach((n) => (n.active = false));
+  playNotes();
+});
+
 function playNotes() {
   NOTE_DETAILS.forEach((n) => {
     const keyElement = document.querySelector(`[data-note="${n.note}"]`);
@@ -60,7 +107,7 @@ function startNote(noteDetail, gain) {
   gainNode.gain.value = gain;
   const oscillator = audioCtx.createOscillator();
   oscillator.frequency.value = noteDetail.frequency;
-  oscillator.type = "sine";
+  oscillator.type = "sine"; // sine, square, sawtooth, triangle, custom
   oscillator.connect(gainNode).connect(audioCtx.destination);
   oscillator.start();
   noteDetail.oscillator = oscillator;
